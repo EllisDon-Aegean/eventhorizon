@@ -21,8 +21,8 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	eh "github.com/looplab/eventhorizon"
-	"github.com/looplab/eventhorizon/mocks"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
+	"github.com/EllisDon-Aegean/eventhorizon/mocks"
 )
 
 func TestNewCommandHandler(t *testing.T) {

@@ -20,10 +20,10 @@ import (
 	"testing"
 	"time"
 
-	eh "github.com/looplab/eventhorizon"
-	"github.com/looplab/eventhorizon/eventstore"
-	"github.com/looplab/eventhorizon/eventstore/memory"
-	"github.com/looplab/eventhorizon/mocks"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
+	"github.com/EllisDon-Aegean/eventhorizon/eventstore"
+	"github.com/EllisDon-Aegean/eventhorizon/eventstore/memory"
+	"github.com/EllisDon-Aegean/eventhorizon/mocks"
 )
 
 func TestEventStore(t *testing.T) {

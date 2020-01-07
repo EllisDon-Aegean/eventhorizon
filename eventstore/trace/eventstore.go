@@ -18,7 +18,7 @@ import (
 	"context"
 	"sync"
 
-	eh "github.com/looplab/eventhorizon"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
 )
 
 // EventStore wraps an EventStore and adds debug tracing.

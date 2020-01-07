@@ -23,9 +23,9 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/kr/pretty"
-	eh "github.com/looplab/eventhorizon"
-	"github.com/looplab/eventhorizon/aggregatestore/events"
-	"github.com/looplab/eventhorizon/mocks"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
+	"github.com/EllisDon-Aegean/eventhorizon/aggregatestore/events"
+	"github.com/EllisDon-Aegean/eventhorizon/mocks"
 )
 
 func TestAggregateHandleCommand(t *testing.T) {

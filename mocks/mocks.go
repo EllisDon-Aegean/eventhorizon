@@ -18,7 +18,7 @@ import (
 	"context"
 	"time"
 
-	eh "github.com/looplab/eventhorizon"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
 )
 
 func init() {

@@ -20,8 +20,8 @@ import (
 	"net/http"
 
 	"github.com/google/uuid"
-	"github.com/looplab/eventhorizon/examples/todomvc/internal/domain"
-	"github.com/looplab/eventhorizon/repo/mongodb"
+	"github.com/EllisDon-Aegean/eventhorizon/examples/todomvc/internal/domain"
+	"github.com/EllisDon-Aegean/eventhorizon/repo/mongodb"
 )
 
 func main() {

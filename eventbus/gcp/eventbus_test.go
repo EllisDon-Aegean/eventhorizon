@@ -21,7 +21,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/looplab/eventhorizon/eventbus"
+	"github.com/EllisDon-Aegean/eventhorizon/eventbus"
 )
 
 func TestEventBus(t *testing.T) {

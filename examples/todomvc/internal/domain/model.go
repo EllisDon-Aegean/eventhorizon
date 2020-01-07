@@ -17,7 +17,7 @@ package domain
 import (
 	"time"
 
-	eh "github.com/looplab/eventhorizon"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
 )
 
 // TodoItem represents each item that can be completed in the todo list.

@@ -17,12 +17,12 @@ package domain
 import (
 	"log"
 
-	eh "github.com/looplab/eventhorizon"
-	"github.com/looplab/eventhorizon/aggregatestore/events"
-	"github.com/looplab/eventhorizon/commandhandler/aggregate"
-	"github.com/looplab/eventhorizon/commandhandler/bus"
-	"github.com/looplab/eventhorizon/eventhandler/projector"
-	"github.com/looplab/eventhorizon/eventhandler/saga"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
+	"github.com/EllisDon-Aegean/eventhorizon/aggregatestore/events"
+	"github.com/EllisDon-Aegean/eventhorizon/commandhandler/aggregate"
+	"github.com/EllisDon-Aegean/eventhorizon/commandhandler/bus"
+	"github.com/EllisDon-Aegean/eventhorizon/eventhandler/projector"
+	"github.com/EllisDon-Aegean/eventhorizon/eventhandler/saga"
 )
 
 // Setup configures the domain.

@@ -1,4 +1,4 @@
-module github.com/looplab/eventhorizon
+module github.com/EllisDon-Aegean/eventhorizon
 
 require (
 	cloud.google.com/go v0.26.0

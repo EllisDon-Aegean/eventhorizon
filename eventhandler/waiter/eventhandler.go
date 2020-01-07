@@ -18,7 +18,7 @@ import (
 	"context"
 
 	"github.com/google/uuid"
-	eh "github.com/looplab/eventhorizon"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
 )
 
 // EventHandler waits for certain events to match a criteria.

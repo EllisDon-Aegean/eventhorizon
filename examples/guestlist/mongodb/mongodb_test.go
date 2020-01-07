@@ -23,14 +23,14 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	eh "github.com/looplab/eventhorizon"
-	"github.com/looplab/eventhorizon/commandhandler/bus"
-	eventbus "github.com/looplab/eventhorizon/eventbus/local"
-	eventstore "github.com/looplab/eventhorizon/eventstore/mongodb"
-	repo "github.com/looplab/eventhorizon/repo/mongodb"
-	"github.com/looplab/eventhorizon/repo/version"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
+	"github.com/EllisDon-Aegean/eventhorizon/commandhandler/bus"
+	eventbus "github.com/EllisDon-Aegean/eventhorizon/eventbus/local"
+	eventstore "github.com/EllisDon-Aegean/eventhorizon/eventstore/mongodb"
+	repo "github.com/EllisDon-Aegean/eventhorizon/repo/mongodb"
+	"github.com/EllisDon-Aegean/eventhorizon/repo/version"
 
-	"github.com/looplab/eventhorizon/examples/guestlist/domain"
+	"github.com/EllisDon-Aegean/eventhorizon/examples/guestlist/domain"
 )
 
 func Example() {

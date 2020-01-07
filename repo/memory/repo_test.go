@@ -18,9 +18,9 @@ import (
 	"context"
 	"testing"
 
-	eh "github.com/looplab/eventhorizon"
-	"github.com/looplab/eventhorizon/mocks"
-	"github.com/looplab/eventhorizon/repo"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
+	"github.com/EllisDon-Aegean/eventhorizon/mocks"
+	"github.com/EllisDon-Aegean/eventhorizon/repo"
 )
 
 func TestReadRepo(t *testing.T) {

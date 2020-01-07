@@ -15,7 +15,7 @@
 package model
 
 import (
-	eh "github.com/looplab/eventhorizon"
+	eh "github.com/EllisDon-Aegean/eventhorizon"
 )
 
 // EventPublisher is an optional event publisher that can be implemented by
