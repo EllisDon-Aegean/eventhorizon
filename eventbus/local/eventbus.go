@@ -17,14 +17,15 @@ package local
 import (
 	"context"
 	"fmt"
+	"log"
 	"sync"
 
-	"github.com/google/uuid"
 	eh "github.com/EllisDon-Aegean/eventhorizon"
+	"github.com/google/uuid"
 )
 
 // DefaultQueueSize is the default queue size per handler for publishing events.
-var DefaultQueueSize = 10
+var DefaultQueueSize = 100
 
 // EventBus is a local event bus that delegates handling of published events
 // to all matching registered handlers, in order of registration.
@@ -161,7 +162,7 @@ func (g *Group) publish(ctx context.Context, event eh.Event) {
 		select {
 		case ch <- evt{ctx, event}:
 		default:
-			// TODO: Maybe log here because queue is full.
+			log.Printf("Queue is full, discard event %v", event)
 		}
 	}
 }
