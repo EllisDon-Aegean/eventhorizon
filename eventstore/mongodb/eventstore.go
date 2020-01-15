@@ -127,7 +127,7 @@ func (s *EventStore) Save(ctx context.Context, events []eh.Event, originalVersio
 			Events:      dbEvents,
 		}
 
-		_, err := s.client.Database(s.dbName(ctx)).Collection("events").InsertOne(context.Background(), aggregate)
+		_, err := s.client.Database(s.dbName(ctx)).Collection("events").InsertOne(ctx, aggregate)
 		if err != nil {
 			return eh.EventStoreError{
 				BaseErr: err,
@@ -144,7 +144,7 @@ func (s *EventStore) Save(ctx context.Context, events []eh.Event, originalVersio
 		}
 
 		if updateResult, err := s.client.Database(s.dbName(ctx)).Collection("events").UpdateOne(
-			context.Background(), filter,
+			ctx, filter,
 			bson.M{
 				"$push": bson.M{"events": bson.M{"$each": dbEvents}},
 				"$inc":  bson.M{"version": len(dbEvents)},
@@ -164,7 +164,7 @@ func (s *EventStore) Save(ctx context.Context, events []eh.Event, originalVersio
 func (s *EventStore) Load(ctx context.Context, id string) ([]eh.Event, error) {
 	var aggregate aggregateRecord
 	filter := bson.D{{Key: "_id", Value: id}}
-	err := s.client.Database(s.dbName(ctx)).Collection("events").FindOne(context.Background(), filter).Decode(&aggregate)
+	err := s.client.Database(s.dbName(ctx)).Collection("events").FindOne(ctx, filter).Decode(&aggregate)
 	if err == mongo.ErrNoDocuments {
 		return []eh.Event{}, nil
 	} else if err != nil {
@@ -196,6 +196,35 @@ func (s *EventStore) Load(ctx context.Context, id string) ([]eh.Event, error) {
 	return events, nil
 }
 
+// FindAggregatesIds implements the FindAggregatesIds method of the eventhorizon.EventStoreMaintainer interface
+func (s *EventStore) FindAggregatesIds(ctx context.Context, filter interface{}) ([]string, error) {
+
+	if filter == nil {
+		filter = bson.D{}
+	}
+	ids := []string{}
+	cursor, err := s.client.Database(s.dbName(ctx)).Collection("events").
+		Find(ctx, filter, &options.FindOptions{
+			Projection: bson.M{"id": 1},
+		})
+	if err != nil {
+		return ids, err
+	}
+	defer cursor.Close(context.Background())
+	for cursor.Next(context.Background()) {
+		id := bson.M{}
+		if err := cursor.Decode(&id); err != nil {
+			return ids, err
+		}
+		ids = append(ids, id["_id"].(string))
+	}
+
+	if err := cursor.Err(); err != nil {
+		return ids, err
+	}
+	return ids, nil
+}
+
 // Clear clears the event storage.
 func (s *EventStore) Clear(ctx context.Context) error {
 
@@ -209,7 +238,7 @@ func (s *EventStore) Clear(ctx context.Context) error {
 	return nil
 }
 
-// RenameEvent implements the RenameEvent method of the eventhorizon.EventStore interface.
+// RenameEvent implements the RenameEvent method of the eventhorizon.EventStoreMaintainer interface.
 func (s *EventStore) RenameEvent(ctx context.Context, from, to eh.EventType) error {
 	// Find and rename all events.
 	// TODO: Maybe use change info.
@@ -231,7 +260,7 @@ func (s *EventStore) RenameEvent(ctx context.Context, from, to eh.EventType) err
 	return nil
 }
 
-// Replace implements the Replace method of the eventhorizon.EventStore interface.
+// Replace implements the Replace method of the eventhorizon.EventStoreMaintainer interface.
 func (s *EventStore) Replace(ctx context.Context, event eh.Event) error {
 
 	// First check if the aggregate exists, the not found error in the update

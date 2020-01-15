@@ -137,6 +137,31 @@ func (s *EventStore) Load(ctx context.Context, id string) ([]eh.Event, error) {
 	return events, nil
 }
 
+// FindAggregatesIds implements the FindAggregatesIds method of the eventhorizon.EventStoreMaintainer interface
+func (s *EventStore) FindAggregatesIds(ctx context.Context, filter interface{}) ([]string, error) {
+	s.dbMu.RLock()
+	defer s.dbMu.RUnlock()
+
+	// Ensure that the namespace exists.
+	s.dbMu.RUnlock()
+	ns := s.namespace(ctx)
+	s.dbMu.RLock()
+
+	aggregates, ok := s.db[ns]
+	if !ok {
+		return []string{}, nil
+	}
+
+	ids := make([]string, len(aggregates))
+	i := 0
+	for _, anAggregate := range aggregates {
+		ids[i] = anAggregate.AggregateID
+		i++
+	}
+
+	return ids, nil
+}
+
 // Replace implements the Replace method of the eventhorizon.EventStore interface.
 func (s *EventStore) Replace(ctx context.Context, event eh.Event) error {
 	// Ensure that the namespace exists.

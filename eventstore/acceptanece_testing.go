@@ -20,9 +20,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/uuid"
 	eh "github.com/EllisDon-Aegean/eventhorizon"
 	"github.com/EllisDon-Aegean/eventhorizon/mocks"
+	"github.com/google/uuid"
 )
 
 // AcceptanceTest is the acceptance test that all implementations of EventStore
@@ -261,6 +261,14 @@ func MaintainerAcceptanceTest(t *testing.T, ctx context.Context, store eh.EventS
 	}
 	if err := mocks.CompareEvents(events[0], newEvent2); err != nil {
 		t.Error("the event was incorrect:", err)
+	}
+
+	ids, errFind := store.FindAggregatesIds(ctx, nil)
+	if len(ids) != 5 {
+		t.Error("There should be 5 ids")
+	}
+	if errFind != nil {
+		t.Error("Couldn't run FindAggregatesIds")
 	}
 }
 

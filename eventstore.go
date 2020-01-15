@@ -61,6 +61,9 @@ type EventStore interface {
 type EventStoreMaintainer interface {
 	EventStore
 
+	// FindAggregatesIds allow to query for aggregates and return theirs ids
+	FindAggregatesIds(ctx context.Context, filter interface{}) ([]string, error)
+
 	// Replace an event, the version must match. Useful for maintenance actions.
 	// Returns ErrAggregateNotFound if there is no aggregate.
 	Replace(context.Context, Event) error
