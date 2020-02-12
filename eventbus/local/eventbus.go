@@ -25,7 +25,7 @@ import (
 )
 
 // DefaultQueueSize is the default queue size per handler for publishing events.
-var DefaultQueueSize = 100
+var DefaultQueueSize = 1000
 
 // EventBus is a local event bus that delegates handling of published events
 // to all matching registered handlers, in order of registration.
